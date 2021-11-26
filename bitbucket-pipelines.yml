@@ -1,0 +1,23 @@
+develop:
+    - step:
+        name: Deploy to Design Center
+        deployment: azure-hello-world
+        
+        script:          
+          - mvn -B clean -DskipTests deploy -DmuleDeploy -Dregion=us-east-2 -Denvironment=Design -Dworkers=1 -DworkerType=Micro -Dapp.runtime=4.4.0 -Dapp.name=azure-hello-world -Danypoint_platform_client_id=$anypoint_platform_client_id_design -Danypoint_platform_client_secret=$anypoint_platform_client_secret_design
+        condition:
+            changesets:
+                includePaths:
+                - "azure-hello-world"
+             
+develop:
+    - step:
+        name: Deploy to Design Center
+        deployment: bitbucket-hello-world
+        
+        script:          
+          - mvn -B clean -DskipTests deploy -DmuleDeploy -Dregion=us-east-2 -Denvironment=Design -Dworkers=1 -DworkerType=Micro -Dapp.runtime=4.4.0 -Dapp.name=bitbucket-hello-world -Danypoint_platform_client_id=$anypoint_platform_client_id_design -Danypoint_platform_client_secret=$anypoint_platform_client_secret_design
+        condition:
+            changesets:
+                includePaths:
+                - "bitbucket-hello-world"
